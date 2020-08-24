@@ -2,9 +2,9 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+/* start screen */
+
 #start-screen-wrapper {
-  /* background-image: url("../img/start_screen_background.jpg");
-	background-size: 100% 100%; */
   width: 1000px;
   height: 700px;
   margin: auto;
@@ -61,10 +61,10 @@ body {
 #rules-button:hover {
   width: 160px;
   height: 50px;
-  background-color: red;
+  background-color: brown;
 }
 
-/* Game Rules */
+/* Game Rules section */
 #game-rules {
   width: 1000px;
   height: 700px;
@@ -79,6 +79,7 @@ body {
   height: 500px;
 }
 
+/* Game screen section */
 #game-wrapper {
   margin: auto;
   display: flex;
@@ -123,4 +124,169 @@ table {
 td {
   box-sizing: border-box;
   border: 1px solid black;
+}
+
+/* Appropriate css classes given to grid table cells */
+
+.obstacle {
+  background-image: url("../img/obstacle/pyramid-image-still.gif");
+  background-size: 100% 100%;
+}
+
+.apple {
+  background-image: url("../img/weapons/apple.gif");
+  background-size: 100% 100%;
+}
+
+.sword {
+  background-image: url("../img/weapons/sword.gif");
+  background-size: 100% 100%;
+}
+
+.katana {
+  background-image: url("../img/weapons/katana.gif");
+  background-size: 100% 100%;
+}
+
+.axe {
+  background-image: url("../img/weapons/axe.gif");
+  background-size: 100% 100%;
+}
+
+.spear {
+  background-image: url("../img/weapons/spear.gif");
+  background-size: 100% 100%;
+}
+
+.player1 {
+  background-image: url("../img/players/aladdin-fight.gif");
+  background-size: 100% 100%;
+}
+
+.player2 {
+  background-image: url("../img/players/jafar-move.gif");
+  background-size: 100% 100%;
+}
+
+/* styling for players data div */
+.player-number {
+  font-size: 26px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+.player-name {
+  font-size: 24px;
+  margin-bottom: 3px;
+}
+
+.player-picture img {
+  width: 65px;
+  height: 65px;
+  margin-bottom: 3px;
+}
+
+.player-health {
+  display: flex;
+  justify-content: space-around;
+  font-size: 23px;
+  margin-bottom: 3px;
+}
+
+.player-weapon-title {
+  font-size: 23px;
+  margin-bottom: 3px;
+}
+
+.player-weapon-picture img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 3px;
+}
+
+.player-weapon-name {
+  font-size: 23px;
+  text-transform: capitalize;
+}
+
+.player-weapon-damage {
+  display: flex;
+  justify-content: space-around;
+  font-size: 23px;
+  margin-bottom: 3px;
+}
+
+.messages {
+  width: 170px;
+  height: 140px;
+  margin-bottom: 10px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.turn-message {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  padding: 5px;
+  font-size: 24px;
+}
+
+.fight-message {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  padding: 5px;
+  font-size: 19px;
+}
+
+.buttons {
+  width: 160px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-self: center;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.button-attack {
+  width: 120px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 25px;
+  background-color: red;
+  color: white;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.button-attack:hover {
+  background-color: white;
+  color: red;
+}
+
+.button-defend {
+  width: 120px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 25px;
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.button-defend:hover {
+  background-color: white;
+  color: green;
 }
