@@ -290,3 +290,15 @@ button:focus {
   background-color: white;
   color: green;
 }
+
+/* Maximum move fields highlighted */
+.moveFieldshighlighted {
+  background-color: blue;
+  opacity: 0.5;
+  border-radius: 20px;
+}
+
+.moveFieldshighlighted:hover {
+  background-color: brown;
+  opacity: 0.3;
+}

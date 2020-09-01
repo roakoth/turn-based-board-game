@@ -10,7 +10,16 @@ var axe;
 var spear;
 var player1;
 var player2;
-
+var activePlayer = "player1";
+var notActivePlayer = "player2";
+var playerCell;
+var playerX;
+var playerY;
+var clickedCell;
+var clickedX;
+var clickedY;
+var checkedCell;
+var nextCell;
 var startScreenWrapper = $("#start-screen-wrapper");
 var startButton = $("#start-button");
 var rulesButton = $("#rules-button");
