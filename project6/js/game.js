@@ -21,6 +21,8 @@ var Game = {
     startScreenWrapper.show();
     gameWrapper.hide();
     gameRulesSection.hide();
+    battleMessageWrapper.hide();
+    gameOverWrapper.hide();
     startButton.on("click", function () {
       startScreenWrapper.hide();
       gameWrapper.show();
@@ -324,6 +326,8 @@ var Game = {
             playerX = Number(playerCell.getAttribute("x"));
             if (playerCell.classList.contains("weapon")) {
               Game.changeWeapon();
+            } else {
+              Game.checkFightPosition();
             }
           }
         } else {
@@ -344,6 +348,8 @@ var Game = {
             playerX = Number(playerCell.getAttribute("x"));
             if (playerCell.classList.contains("weapon")) {
               Game.changeWeapon();
+            } else {
+              Game.checkFightPosition();
             }
           }
         }
@@ -369,6 +375,8 @@ var Game = {
             playerY = Number(playerCell.getAttribute("y"));
             if (playerCell.classList.contains("weapon")) {
               Game.changeWeapon();
+            } else {
+              Game.checkFightPosition();
             }
           }
         } else {
@@ -389,16 +397,25 @@ var Game = {
             playerY = Number(playerCell.getAttribute("y"));
             if (playerCell.classList.contains("weapon")) {
               Game.changeWeapon();
+            } else {
+              Game.checkFightPosition();
             }
           }
         }
       }
 
-      // If active player has not met other player
-      Game.changeActivePlayer();
-      Game.createMovementFields();
-      Game.showMovementFields();
-      Game.displayPlayerTurnMessage();
+      if (fight !== true) {
+        // If active player has not met other player
+        Game.changeActivePlayer();
+        Game.createMovementFields();
+        Game.showMovementFields();
+        Game.displayPlayerTurnMessage();
+      } else {
+        // If active player has met other player
+        var table = document.querySelector("table");
+        table.removeEventListener("mousedown", Game.movePlayers);
+        Game.showBattleMessage();
+      }
     }
   },
 
@@ -489,5 +506,194 @@ var Game = {
     Game.showMovementFields();
     var table = document.querySelector("table");
     table.addEventListener("mousedown", Game.movePlayers);
+  },
+
+  // Checking all adjacent cells on the player's movement way for presence of other player
+  checkFightPosition: function () {
+    fight = false;
+    // Checking cell on player's right side (if it exists)
+    if (playerX !== gridXFields) {
+      checkedCell = document.querySelector(
+        "td[x='" + (playerX + 1) + "'][y='" + playerY + "']"
+      );
+      if (checkedCell.classList.contains(notActivePlayer)) {
+        fight = true;
+      }
+    }
+    // Checking cell on player's left side (if it exists)
+    if (playerX !== 1) {
+      checkedCell = document.querySelector(
+        "td[x='" + (playerX - 1) + "'][y='" + playerY + "']"
+      );
+      if (checkedCell.classList.contains(notActivePlayer)) {
+        fight = true;
+      }
+    }
+    // Checking cell below player (if it exists)
+    if (playerY !== gridYFields) {
+      checkedCell = document.querySelector(
+        "td[x='" + playerX + "'][y='" + (playerY + 1) + "']"
+      );
+      if (checkedCell.classList.contains(notActivePlayer)) {
+        fight = true;
+      }
+    }
+    // Checking cell above player (if it exists)
+    if (playerY !== 1) {
+      checkedCell = document.querySelector(
+        "td[x='" + playerX + "'][y='" + (playerY - 1) + "']"
+      );
+      if (checkedCell.classList.contains(notActivePlayer)) {
+        fight = true;
+      }
+    }
+  },
+  // Showing battle begins message
+  showBattleMessage: function () {
+    battleMessageWrapper.show();
+    battleMessageHide = setTimeout(Game.hideBattleMessage, 2000);
+  },
+
+  // Hiding battle begins message and starting fight
+  hideBattleMessage: function () {
+    clearTimeout(battleMessageHide);
+    battleMessageWrapper.hide();
+    Game.startFight();
+  },
+
+  // Starting fight
+  startFight: function () {
+    if (activePlayer === "player1") {
+      player1FightButtons.show();
+    } else {
+      player2FightButtons.show();
+    }
+    player1FightButtons.children[0].addEventListener(
+      "click",
+      Game.player1FightTurn
+    );
+    player2FightButtons.children[0].addEventListener(
+      "click",
+      Game.player2FightTurn
+    );
+  },
+
+  // When player 1 click attack or defend button
+  player1FightTurn: function (event) {
+    if (event.target !== event.currentTarget) {
+      if (event.target.classList.contains("button-attack")) {
+        if (player2Defend) {
+          damage = player1.weapon.damage / 2;
+          player2Defend = false;
+        } else {
+          damage = player1.weapon.damage;
+        }
+        player1Defend = false;
+        player2.health -= damage;
+        player1FightMessage.text(
+          "You attacked and caused " + damage + " points of damage"
+        );
+        if (player2.health <= 0) {
+          player2HealthValue[0].innerHTML = 0;
+          player2FightMessage.text("You lost !!!");
+          player1FightMessage.text("You won !!!");
+          Game.gameOver();
+          return;
+        } else {
+          player2HealthValue[0].innerHTML = player2.health;
+          player2FightMessage.text(
+            "You have lost " + damage + " points of health"
+          );
+        }
+      } else {
+        player1Defend = true;
+        player1FightMessage.text("You are defending against next atack");
+      }
+      player1FightButtons.hide();
+      player2FightButtons.show();
+      if (player2Defend) {
+        player2DefendButton.hide();
+      } else {
+        player2DefendButton.show();
+      }
+      Game.displayPlayerTurnMessage();
+      Game.changeActivePlayer();
+    }
+  },
+
+  // When player 2 click attack or defend button
+  player2FightTurn: function (event) {
+    if (event.target !== event.currentTarget) {
+      if (event.target.classList.contains("button-attack")) {
+        if (player1Defend) {
+          damage = player2.weapon.damage / 2;
+          player1Defend = false;
+        } else {
+          damage = player2.weapon.damage;
+        }
+        player2Defend = false;
+        player1.health -= damage;
+        player2FightMessage.text(
+          "You attacked and caused " + damage + " points of damage"
+        );
+        if (player1.health <= 0) {
+          player1HealthValue[0].innerHTML = 0;
+          player1FightMessage.text("You lost !!!");
+          player2FightMessage.text("You won !!!");
+          Game.gameOver();
+          return;
+        } else {
+          player1HealthValue[0].innerHTML = player1.health;
+          player1FightMessage.text(
+            "You have lost " + damage + " points of health"
+          );
+        }
+      } else {
+        player2Defend = true;
+        player2FightMessage.text("You are defending against next atack");
+      }
+      player2FightButtons.hide();
+      player1FightButtons.show();
+      if (player1Defend) {
+        player1DefendButton.hide();
+      } else {
+        player1DefendButton.show();
+      }
+      Game.displayPlayerTurnMessage();
+      Game.changeActivePlayer();
+    }
+  },
+
+  // Displaying game over message and reseting variables to start next game
+  gameOver: function () {
+    player1FightButtons[0].removeEventListener("click", Game.player1FightTurn);
+    player2FightButtons[0].removeEventListener("click", Game.player2FightTurn);
+    Game.hideFightButtons();
+    player1TurnMessage[0].innerHTML = "";
+    player2TurnMessage[0].innerHTML = "";
+    gameOverWrapper.show();
+    if (activePlayer === "player1") {
+      winnerNumber.text("Player 1");
+      winnerName.text(player1.name);
+      winnerPicture.html('<img src="img/players/aladdin-fight.gif">');
+    } else {
+      winnerNumber.text("Player 2");
+      winnerName.text(player2.name);
+      winnerPicture.html('<img src="img/players/jafar-move.gif">');
+    }
+    // When play again button is clicked
+    playAgainButton.on("click", function () {
+      gameOverWrapper.hide();
+      player1FightMessage.text("");
+      player2FightMessage.text("");
+      var boardWrapper = $("#board-wrapper");
+      // Erasing board grid table
+      boardWrapper.html("");
+      fight = false;
+      Game.gridAvailableFields = [];
+      Game.playerMovementFields = [];
+      Game.changeActivePlayer();
+      Game.init();
+    });
   },
 };

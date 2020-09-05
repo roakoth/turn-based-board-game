@@ -50,3 +50,10 @@ var player2TurnMessage = $("#player-2-data-div .turn-message");
 var player2FightMessage = $("#player-2-data-div .fight-message");
 var player2FightButtons = $("#player-2-data-div .buttons");
 var player2DefendButton = $("#player-2-data-div .button-defend");
+
+var battleMessageWrapper = $("#start-battle-message-wrapper");
+var gameOverWrapper = $("#game-over-wrapper");
+var winnerNumber = $("#game-over .player-number");
+var winnerName = $("#game-over .player-name");
+var winnerPicture = $("#game-over .player-picture");
+var playAgainButton = $("#play-again-button");

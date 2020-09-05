@@ -46,7 +46,8 @@ body {
 }
 
 #start-button,
-#rules-button {
+#rules-button,
+#play-again-button {
   width: 150px;
   height: 40px;
   border-radius: 25px;
@@ -301,4 +302,87 @@ button:focus {
 .moveFieldshighlighted:hover {
   background-color: brown;
   opacity: 0.3;
+}
+
+#start-battle-message-wrapper {
+  width: 320px;
+  height: 100px;
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  margin-left: -160px;
+  margin-top: -50px;
+  z-index: 1;
+  /* margin: 1px solid black; */
+  /* background-image: url("../img/board_wrapper_background.jpg");
+	background-size: 100% 100%; */
+  border-radius: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#start-battle-message {
+  width: 300px;
+  height: 80px;
+  /* margin: 1px solid black; */
+  /* background-image: url("../img/game_over_background.jpg");
+	background-size: 100% 100%; */
+  border-radius: 25px;
+  text-align: center;
+}
+
+/* #start-battle-message h1 {
+	font-family: 'Merienda', cursive;
+} */
+
+#game-over-wrapper {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -200px;
+  z-index: 1;
+  /* margin: 1px solid black; */
+  /* background-image: url("../img/board_wrapper_background.jpg");
+	background-size: 100% 100%; */
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-over {
+  width: 375px;
+  height: 375px;
+  /* background-image: url("../img/game_over_background.jpg");
+  background-size: 100% 100%; */
+  /* margin: 1px solid black; */
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-over h1 {
+  /* font-family: 'Merienda', cursive; */
+  margin-bottom: 10px;
+}
+
+#game-over h2 {
+  /* font-family: 'Domine', serif; */
+  margin: 10px 0px;
+}
+
+#game-over .player-picture {
+  margin-bottom: 15px;
+}
+
+#play-again-button-container {
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
