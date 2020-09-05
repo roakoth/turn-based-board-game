@@ -568,11 +568,11 @@ var Game = {
     } else {
       player2FightButtons.show();
     }
-    player1FightButtons.children[0].addEventListener(
+    player1FightButtons[0].addEventListener(
       "click",
       Game.player1FightTurn
     );
-    player2FightButtons.children[0].addEventListener(
+    player2FightButtons[0].addEventListener(
       "click",
       Game.player2FightTurn
     );
