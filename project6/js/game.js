@@ -568,14 +568,9 @@ var Game = {
     } else {
       player2FightButtons.show();
     }
-    player1FightButtons[0].addEventListener(
-      "click",
-      Game.player1FightTurn
-    );
-    player2FightButtons[0].addEventListener(
-      "click",
-      Game.player2FightTurn
-    );
+
+    player1FightButtons[0].addEventListener("click", Game.player1FightTurn);
+    player2FightButtons[0].addEventListener("click", Game.player2FightTurn);
   },
 
   // When player 1 click attack or defend button
@@ -597,6 +592,10 @@ var Game = {
           player2HealthValue[0].innerHTML = 0;
           player2FightMessage.text("You lost !!!");
           player1FightMessage.text("You won !!!");
+          gameOverWrapper.show();
+          winnerNumber.text("Player 1");
+          winnerName.text(player1.name);
+          winnerPicture.html('<img src="img/players/aladdin-fight.gif">');
           Game.gameOver();
           return;
         } else {
@@ -605,7 +604,7 @@ var Game = {
             "You have lost " + damage + " points of health"
           );
         }
-      } else {
+      } else if (event.target.classList.contains("button-defend")) {
         player1Defend = true;
         player1FightMessage.text("You are defending against next atack");
       }
@@ -640,6 +639,10 @@ var Game = {
           player1HealthValue[0].innerHTML = 0;
           player1FightMessage.text("You lost !!!");
           player2FightMessage.text("You won !!!");
+          gameOverWrapper.show();
+          winnerNumber.text("Player 2");
+          winnerName.text(player2.name);
+          winnerPicture.html('<img src="img/players/jafar-move.gif">');
           Game.gameOver();
           return;
         } else {
@@ -648,7 +651,7 @@ var Game = {
             "You have lost " + damage + " points of health"
           );
         }
-      } else {
+      } else if (event.target.classList.contains("button-defend")) {
         player2Defend = true;
         player2FightMessage.text("You are defending against next atack");
       }
@@ -671,16 +674,7 @@ var Game = {
     Game.hideFightButtons();
     player1TurnMessage[0].innerHTML = "";
     player2TurnMessage[0].innerHTML = "";
-    gameOverWrapper.show();
-    if (activePlayer === "player1") {
-      winnerNumber.text("Player 1");
-      winnerName.text(player1.name);
-      winnerPicture.html('<img src="img/players/aladdin-fight.gif">');
-    } else {
-      winnerNumber.text("Player 2");
-      winnerName.text(player2.name);
-      winnerPicture.html('<img src="img/players/jafar-move.gif">');
-    }
+
     // When play again button is clicked
     playAgainButton.on("click", function () {
       gameOverWrapper.hide();
