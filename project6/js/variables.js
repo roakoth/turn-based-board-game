@@ -39,6 +39,7 @@ var player1FightMessage = $("#player-1-data-div .fight-message");
 var player1FightButtons = $("#player-1-data-div .buttons");
 var player1AttackButton = $("#player-1-data-div .button-attack");
 var player1DefendButton = $("#player-1-data-div .button-defend");
+var player1Defend = false;
 var player2Name = $("#player-2-data-div .player-name");
 var player2Picture = $("#player-2-data-div .player-picture");
 var player2HealthValue = $("#player-2-data-div .player-health-value");
@@ -52,6 +53,7 @@ var player2FightMessage = $("#player-2-data-div .fight-message");
 var player2FightButtons = $("#player-2-data-div .buttons");
 var player2AttackButton = $("#player-2-data-div .button-attack");
 var player2DefendButton = $("#player-2-data-div .button-defend");
+var player2Defend = false;
 
 var battleMessageWrapper = $("#start-battle-message-wrapper");
 var gameOverWrapper = $("#game-over-wrapper");

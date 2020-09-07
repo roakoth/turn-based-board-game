@@ -577,7 +577,7 @@ var Game = {
   player1FightTurn: function (event) {
     if (event.target !== event.currentTarget) {
       if (event.target.classList.contains("button-attack")) {
-        if (player2Defend) {
+        if (player2Defend === true) {
           damage = player1.weapon.damage / 2;
           player2Defend = false;
         } else {
@@ -604,7 +604,7 @@ var Game = {
             "You have lost " + damage + " points of health"
           );
         }
-      } else if (event.target.classList.contains("button-defend")) {
+      } else {
         player1Defend = true;
         player1FightMessage.text("You are defending against next atack");
       }
@@ -615,8 +615,8 @@ var Game = {
       } else {
         player2DefendButton.show();
       }
-      Game.displayPlayerTurnMessage();
       Game.changeActivePlayer();
+      Game.displayPlayerTurnMessage();
     }
   },
 
@@ -624,7 +624,7 @@ var Game = {
   player2FightTurn: function (event) {
     if (event.target !== event.currentTarget) {
       if (event.target.classList.contains("button-attack")) {
-        if (player1Defend) {
+        if (player1Defend === true) {
           damage = player2.weapon.damage / 2;
           player1Defend = false;
         } else {
@@ -651,7 +651,7 @@ var Game = {
             "You have lost " + damage + " points of health"
           );
         }
-      } else if (event.target.classList.contains("button-defend")) {
+      } else {
         player2Defend = true;
         player2FightMessage.text("You are defending against next atack");
       }
@@ -662,8 +662,8 @@ var Game = {
       } else {
         player1DefendButton.show();
       }
-      Game.displayPlayerTurnMessage();
       Game.changeActivePlayer();
+      Game.displayPlayerTurnMessage();
     }
   },
 
