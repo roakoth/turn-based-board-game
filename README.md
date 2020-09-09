@@ -19,5 +19,4 @@ During combat, the game works is as follows:
 4. If the player chooses to defend themselves, they sustain 50% less damage than normal
 5. As soon as the life points of a player (initially 100) falls to 0, they lose. A message appears and the game is over.<br>
 
- # Live preview of the site 
-https://roakoth.github.io/turn-based-board-game/
+
