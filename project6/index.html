@@ -4,7 +4,9 @@
 	
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+		<!-- Google fonts-->
+		<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+	    
 		<!-- My style CSS -->
 		<link href="css/style.css" type="text/css" rel="stylesheet">
 		<title>Fearless Fighters</title>
@@ -14,36 +16,41 @@
 	<body>
 		
 		<!--	Start screen	-->
-		<div id="start-screen-wrapper">
+		
+        <div id="start-screen-wrapper">
 			<div id="start-screen">
 				<header>
 					<h1>Welcome to Fearless Fighters </h1>
 				</header>
-				<div id="player">
-          <div class="players">
-            <img src="/img/players/aladdin.jpg" alt="Aladdin" />
-          </div>
-          <div class="players">
-            <img src="/img/players/jafar.jpg" alt="Jafar" />
-          </div>
-        </div>
-        <div id="text">
-          <h2>Who is gonna make it out alive?</h2>
-        </div>
 
-        <div id="game-button-container">
-          <button id="start-button" type="button">Start Game</button>
-          <button id="rules-button" type="button">Game rules</button>
-        </div>
+				<div id="player">
+                   <div class="players">
+                    <img src="/img/players/aladdin.jpg" alt="Aladdin" />
+                    </div>
+                  <div class="players">
+                  <img src="/img/players/jafar.jpg" alt="Jafar" />
+		      </div>
+		   
+              </div>
+              <div id="text">
+                  <h2>Who is gonna make it out alive?</h2>
+             </div>
+
+               <div id="game-button-container">
+                   <button id="start-button" type="button">Start Game</button>
+                   <button id="rules-button" type="button">Game rules</button>
+               </div>
 				
-			</div>
-		</div>
+		    </div>	
+	  </div>
+		
+		
 
 		<!-- Game rules-->
-       <section id="game-rules">
+       <section id="game-rules" class="modalDialog">
 					
-					<div id="rules-section">
-						
+					<div id="rules-section" class="modalContent" >
+					 <span class="close">&times;</span>	
 					 <div>
 						  <div>
 						    <h2>Game rules </h2>
@@ -71,6 +78,8 @@
 								</ul>
 							</p>
 						</div>
+
+
 					</div>
         </section> 
 	

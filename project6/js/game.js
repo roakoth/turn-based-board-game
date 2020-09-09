@@ -28,11 +28,18 @@ var Game = {
       gameWrapper.show();
       gameRulesSection.hide();
     });
+    //when the user clicks on the button open the modal
     rulesButton.on("click", function () {
-      startScreenWrapper.hide();
-      gameWrapper.hide();
       gameRulesSection.show();
+      gameRulesSection.style.display = "block";
     });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      gameRulesSection.hide();
+      startScreenWrapper.show();
+      gameRulesSection.style.display = "none";
+    };
   },
 
   // Getting random number from zero to maximum parameter
@@ -130,7 +137,6 @@ var Game = {
     } else {
       tdElement.classList.add(cssClassName);
     }
-    //Game.gridAvailableFields.splice(index, 1);
   },
 
   // Setting players data into players info data divs
@@ -151,7 +157,7 @@ var Game = {
     player2WeaponDamageValue.text(player1.weapon.damage);
   },
 
-  // Hiding fight (attack and defense) buttons
+  // Hiding fight (attack and defend) buttons
   hideFightButtons: function () {
     player1FightButtons.hide();
     player2FightButtons.hide();
@@ -510,7 +516,6 @@ var Game = {
 
   // Checking all adjacent cells on the player's movement way for presence of other player
   checkFightPosition: function () {
-    fight = false;
     // Checking cell on player's right side (if it exists)
     if (playerX !== gridXFields) {
       checkedCell = document.querySelector(
@@ -575,96 +580,110 @@ var Game = {
 
   // When player 1 click attack or defend button
   player1FightTurn: function (event) {
-    if (event.target !== event.currentTarget) {
-      if (event.target.classList.contains("button-attack")) {
-        if (player2Defend === true) {
-          damage = player1.weapon.damage / 2;
-          player2Defend = false;
-        } else {
-          damage = player1.weapon.damage;
-        }
-        player1Defend = false;
-        player2.health -= damage;
-        player1FightMessage.text(
-          "You attacked and caused " + damage + " points of damage"
+    if (event.target.classList.contains("button-attack")) {
+      //if player 2 has defended
+      if (player2.defend === true) {
+        damage = player1.weapon.damage / 2;
+        player2.defend = false;
+      } else {
+        //if player 2 has not defended
+        damage = player1.weapon.damage;
+      }
+      //player 1 defense is false
+      player1.defend = false;
+      //the damage is subtracted from health depending on whether player 2 defended or not
+      player2.health -= damage;
+      player1FightMessage.text(
+        "You attacked and caused " + damage + " points of damage"
+      );
+      //if player 2 health is less than or equal to zero
+      if (player2.health <= 0) {
+        player2HealthValue[0].innerHTML = 0;
+        player2FightMessage.text("You lost !!!");
+        player1FightMessage.text("You won !!!");
+        gameOverWrapper.show();
+        //the winner is announced
+        winnerNumber.text("Player 1");
+        winnerName.text(player1.name);
+        winnerPicture.html('<img src="img/players/aladdin-fight.gif">');
+        Game.gameOver();
+        return;
+      } else {
+        // player 2 health is still greater than 0
+        player2HealthValue[0].innerHTML = player2.health;
+        player2FightMessage.text(
+          "You have lost " + damage + " points of health"
         );
-        if (player2.health <= 0) {
-          player2HealthValue[0].innerHTML = 0;
-          player2FightMessage.text("You lost !!!");
-          player1FightMessage.text("You won !!!");
-          gameOverWrapper.show();
-          winnerNumber.text("Player 1");
-          winnerName.text(player1.name);
-          winnerPicture.html('<img src="img/players/aladdin-fight.gif">');
-          Game.gameOver();
-          return;
-        } else {
-          player2HealthValue[0].innerHTML = player2.health;
-          player2FightMessage.text(
-            "You have lost " + damage + " points of health"
-          );
-        }
-      } else {
-        player1Defend = true;
-        player1FightMessage.text("You are defending against next atack");
       }
-      player1FightButtons.hide();
-      player2FightButtons.show();
-      if (player2Defend) {
-        player2DefendButton.hide();
-      } else {
-        player2DefendButton.show();
-      }
-      Game.changeActivePlayer();
-      Game.displayPlayerTurnMessage();
+    } else {
+      //in case player 1 defends
+      player1.defend = true;
+      player1FightMessage.text("You are defending against next atack");
     }
+    player1FightButtons.hide();
+    player2FightButtons.show();
+    //if player 2 clicks defend button it gets hidden
+    if (player2.defend === true) {
+      player2DefendButton.hide();
+    } else {
+      player2DefendButton.show();
+    }
+    Game.changeActivePlayer();
+    Game.displayPlayerTurnMessage();
   },
 
   // When player 2 click attack or defend button
   player2FightTurn: function (event) {
-    if (event.target !== event.currentTarget) {
-      if (event.target.classList.contains("button-attack")) {
-        if (player1Defend === true) {
-          damage = player2.weapon.damage / 2;
-          player1Defend = false;
-        } else {
-          damage = player2.weapon.damage;
-        }
-        player2Defend = false;
-        player1.health -= damage;
-        player2FightMessage.text(
-          "You attacked and caused " + damage + " points of damage"
+    if (event.target.classList.contains("button-attack")) {
+      //if player 1 has defended
+      if (player1.defend === true) {
+        damage = player2.weapon.damage / 2;
+        player1.defend = false;
+      } else {
+        //if player 1 has not defended
+        damage = player2.weapon.damage;
+      }
+      //player 2 defense is false
+      player2.defend = false;
+      //the damage is subtracted from health depending on whether player 1 defended or not
+      player1.health -= damage;
+      player2FightMessage.text(
+        "You attacked and caused " + damage + " points of damage"
+      );
+      //if player 1 health is less than or equal to zero
+      if (player1.health <= 0) {
+        player1HealthValue[0].innerHTML = 0;
+        player1FightMessage.text("You lost !!!");
+        player2FightMessage.text("You won !!!");
+        gameOverWrapper.show();
+        //the winner is announced
+        winnerNumber.text("Player 2");
+        winnerName.text(player2.name);
+        winnerPicture.html('<img src="img/players/jafar-move.gif">');
+        Game.gameOver();
+        return;
+      } else {
+        //player 1 health is still greater than 0
+        player1HealthValue[0].innerHTML = player1.health;
+        player1FightMessage.text(
+          "You have lost " + damage + " points of health"
         );
-        if (player1.health <= 0) {
-          player1HealthValue[0].innerHTML = 0;
-          player1FightMessage.text("You lost !!!");
-          player2FightMessage.text("You won !!!");
-          gameOverWrapper.show();
-          winnerNumber.text("Player 2");
-          winnerName.text(player2.name);
-          winnerPicture.html('<img src="img/players/jafar-move.gif">');
-          Game.gameOver();
-          return;
-        } else {
-          player1HealthValue[0].innerHTML = player1.health;
-          player1FightMessage.text(
-            "You have lost " + damage + " points of health"
-          );
-        }
-      } else {
-        player2Defend = true;
-        player2FightMessage.text("You are defending against next atack");
       }
-      player2FightButtons.hide();
-      player1FightButtons.show();
-      if (player1Defend) {
-        player1DefendButton.hide();
-      } else {
-        player1DefendButton.show();
-      }
-      Game.changeActivePlayer();
-      Game.displayPlayerTurnMessage();
+    } else {
+      //in case player 2 defends
+      player2.defend = true;
+      player2FightMessage.text("You are defending against next atack");
     }
+    player2FightButtons.hide();
+    player1FightButtons.show();
+    //if player 1 clicks defend button it gets hidden
+    if (player1.defend === true) {
+      player1DefendButton.hide();
+    } else {
+      player1DefendButton.show();
+    }
+    Game.changeActivePlayer();
+    Game.displayPlayerTurnMessage();
   },
 
   // Displaying game over message and reseting variables to start next game
@@ -678,7 +697,9 @@ var Game = {
     // When play again button is clicked
     playAgainButton.on("click", function () {
       gameOverWrapper.hide();
+      //player1FightMessage is set to blank
       player1FightMessage.text("");
+      //player2FightMessage is set to blank
       player2FightMessage.text("");
       var boardWrapper = $("#board-wrapper");
       // Erasing board grid table

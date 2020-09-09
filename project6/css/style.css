@@ -3,14 +3,19 @@ body {
 }
 
 /* start screen */
-
 #start-screen-wrapper {
   width: 1000px;
   height: 700px;
+  height: 100vh;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#start-screen-wrapper h1,
+h2 {
+  font-family: "Source Code Pro", monospace;
 }
 
 #start-screen {
@@ -69,15 +74,65 @@ body {
 #game-rules {
   width: 1000px;
   height: 700px;
-  margin: auto;
+  position: absolute;
+  top: 220px;
+  left: 30%;
+  margin-left: -200px;
+  margin-top: -200px;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+#game-rules h2,
+h3,
+li {
+  font-family: "Source Code Pro", monospace;
+}
+
 #rules-section {
   width: 700px;
   height: 500px;
+}
+
+/* The modal background */
+.modalDialog {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modalContent {
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  max-width: 800px;
+  position: relative;
+  border: 1px solid #888;
+  width: 90%; /* Could be more or less, depending on screen size */
+  border-radius: 3px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Game screen section */
@@ -93,6 +148,8 @@ body {
   height: 700px;
   display: flex;
   justify-content: center;
+  background-image: url(../img/brown-sand.jpg);
+  background-size: 100% 100%;
   align-items: center;
   border-radius: 25px;
 }
@@ -102,6 +159,9 @@ body {
   width: 265px;
   height: 700px;
   display: flex;
+  background-image: url("../img/fine_sand.jpg");
+  background-size: 100% 100%;
+  border-radius: 25px;
   justify-content: center;
   align-items: center;
 }
@@ -124,7 +184,7 @@ table {
 
 td {
   box-sizing: border-box;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 /* Appropriate css classes given to grid table cells */
@@ -294,7 +354,7 @@ button:focus {
 
 /* Maximum move fields highlighted */
 .moveFieldshighlighted {
-  background-color: blue;
+  background-color: white;
   opacity: 0.5;
   border-radius: 20px;
 }
@@ -313,9 +373,9 @@ button:focus {
   margin-left: -160px;
   margin-top: -50px;
   z-index: 1;
-  /* margin: 1px solid black; */
-  /* background-image: url("../img/board_wrapper_background.jpg");
-	background-size: 100% 100%; */
+  margin: 1px solid black;
+  background-image: url("../img/white.jpg");
+  background-size: 100% 100%;
   border-radius: 35px;
   display: flex;
   justify-content: center;
@@ -325,9 +385,9 @@ button:focus {
 #start-battle-message {
   width: 300px;
   height: 80px;
-  /* margin: 1px solid black; */
-  /* background-image: url("../img/game_over_background.jpg");
-	background-size: 100% 100%; */
+  /* margin: 1px solid black;
+  background-image: url("../img/white.jpg");
+  background-size: 100% 100%; */
   border-radius: 25px;
   text-align: center;
 }
@@ -345,9 +405,9 @@ button:focus {
   margin-left: -200px;
   margin-top: -200px;
   z-index: 1;
-  /* margin: 1px solid black; */
-  /* background-image: url("../img/board_wrapper_background.jpg");
-	background-size: 100% 100%; */
+  margin: 1px solid black;
+  background-image: url("../img/white.jpg");
+  background-size: 100% 100%;
   border-radius: 25px;
   display: flex;
   justify-content: center;
@@ -368,12 +428,10 @@ button:focus {
 }
 
 #game-over h1 {
-  /* font-family: 'Merienda', cursive; */
   margin-bottom: 10px;
 }
 
 #game-over h2 {
-  /* font-family: 'Domine', serif; */
   margin: 10px 0px;
 }
 
