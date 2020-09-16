@@ -9,6 +9,7 @@ var katana;
 var axe;
 var spear;
 var player1;
+var repeat = true;
 var fight = false;
 var player2;
 var activePlayer = "player1";
@@ -26,12 +27,26 @@ var startButton = $("#start-button");
 
 var gameWrapper = $("#game-wrapper");
 
-//Get the modal
+//The modal displaying game rules section
 var gameRulesSection = $("#game-rules");
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-//Get the button that opens the modal
+
+// The <span> element that closes the modal
+var span = document.getElementsByClassName("close");
+
+// The button that opens the modal
 var rulesButton = $("#rules-button");
+
+// The modal displaying player user input fields
+var playerNamesSection = document.getElementById("player-names-section");
+
+// Player users input fields
+var player1User = document.getElementById("player1Name");
+var player2User = document.getElementById("player2Name");
+
+//player user names section
+var playerNamesSection = $("#player-names-section");
+//submit button that gets player users value
+var playerNamesButton = $("#player-names-button");
 
 var player1Name = $("#player-1-data-div .player-name");
 var player1Picture = $("#player-1-data-div .player-picture");

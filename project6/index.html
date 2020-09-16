@@ -38,7 +38,7 @@
 
                <div id="game-button-container">
                    <button id="start-button" type="button">Start Game</button>
-                   <button id="rules-button" type="button">Game rules</button>
+                   <button id="rules-button" class="myBtn" type="button">Game rules</button>
                </div>
 				
 		    </div>	
@@ -81,14 +81,33 @@
 
 
 					</div>
-        </section> 
+		</section> 
+		
+		<section id="player-names-section" class="modalDialog">
+			<div id="player-names" class="modalContent">
+				<span class="close"> &times;</span>
+				<h1>  Player Names</h1>  
+               <form>
+                   <div class="form-group">
+                      <label for="name-one"> Enter player 1 Name </label>
+                      <input type="text" name="name" id="player1Name" class="input">
+                  </div>
+                  <div class="form-group">
+                      <label for="name-two"> Enter player 2 Name </label>
+                      <input type="text" name="name" id="player2Name" class="input">
+                  </div>
+
+                  <button id="player-names-button"  class="myBtn" type="button"> Submit</button>
+               </form>
+			</div>
+		</section>
 	
 		<!--	Game screen	-->
 		<div id="game-wrapper">
 			<div id="player-1-data-div">
 				<div class="player-data-div-content">
 					<div class="player-number">Player 1</div>
-					<div class="player-name"></div>
+					<div id="playerOneName" class="player-name"></div>
 					<div class="player-picture"></div>
 					<div class="player-health">
 						<div class="player-health-title">Health :</div>
@@ -115,7 +134,7 @@
 			<div id="player-2-data-div">
 				<div class="player-data-div-content">
 					<div class="player-number">Player 2</div>
-					<div class="player-name"></div>
+					<div id="playerTwoName" class="player-name"></div>
 					<div class="player-picture"></div>
 					<div class="player-health">
 						<div class="player-health-title">Health :</div>
